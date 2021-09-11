@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+:root {
+    --home-bg: #CD113B;
+    --projects-bg: #FF7600;
+    --skills-bg: #FFA900;
+    --connect-bg: #FFD371;
+    --certificates-bg: #FF4848;
+    --other-bg: #FF9A8C;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html{
+    height: 100%;
+    font-family: 'Poppins', sans-serif;
+    background-color: rgb(53, 53, 53);
+}
+
+h1 {
+    font-size: 80px;
+    font-weight: 900;
+}
+
+h2 {
+    font-size: 60px;
+    font-weight: 800;
+}
+
+h3 {
+    font-size: 40px;
+    font-weight: 700;
+}
+
+h4 {
+    font-size: 33px;
+    font-weight: 600;
+}
+
+p {
+    font-size: 22px;
+    font-weight: 400;
+}
+
+#root {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: rgb(53, 53, 53);
+    flex-direction: column;
+}
+
+.flip-card {
+    background-color: transparent;
+    width: 95%;
+    height: 95%;
+    perspective: 1500px;
+    margin-top: 20px;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s ease-out;
+    transform-style: preserve-3d;
+    border-radius: 20px;
+}
+
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 20px;
+    overflow-y: scroll;
+}
+
+.flip-card-back {
+    transform: rotateY(180deg);
+}
+
+.buttons > button{
+    padding: 0px 20px;
+    background: transparent;
+    border: none;
+    font-size: 3em;
+    color: #fff;
+    z-index: 100;
+    text-shadow:
+    0 0 7px #fff,
+    0 0 10px #fff,
+    0 0 21px #fff,
+    0 0 42px #0fa,
+    0 0 82px #0fa,
+    0 0 92px #0fa,
+    0 0 102px #0fa,
+    0 0 151px #0fa;
+}
+
+.content {
+    border-radius: 20px;
+    padding: 40px 40px;
+    width: 100%;
+    min-height: 100%;
+    transition: opacity 0.8s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.project {
+    margin-top: 30px;
+}
+.project > p{
+    margin-bottom: 20px;
+}
+.project > a{
+    background-color: #000;
+    border-radius: 10px;
+    color: var(--projects-bg);
+    padding: 7px;
+}
+
+.heading {
+    text-decoration: underline;
+}
+
+.sites {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.sites > a{
+    margin: 30px 30px;
+}
+.sites img{
+    width: 99px;
+}
