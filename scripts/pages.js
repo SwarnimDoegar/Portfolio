@@ -51,7 +51,7 @@ const certificatesPage = `
 `;
 
 const connectPage = `
-    <div class="content" style="background-color: #FFD371;" id="connect">
+    <div class="content" style="background-color: #127681;" id="connect">
     <h2 class="heading">connect</h2>
     <div class="sites">
     <a href="https://github.com/SwarnimDoegar"><img src="./res/github.png" alt="github"></a>
