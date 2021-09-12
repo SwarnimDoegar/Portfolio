@@ -1,7 +1,9 @@
 const flipCard = document.getElementsByClassName("flip-card-inner")[0]
 let deg = 0
 let pageNum = 0
-let pageCount = pages.length
+const pageCount = pages.length
+const degDenied = 20
+const degDeniedInterval = 300
 
 function rotateFlipCard(d) {
     deg += d
@@ -12,6 +14,8 @@ function rotateFlipCard(d) {
 
 function goNext(){
     if(pageNum === pageCount - 1){
+        rotateFlipCard(-degDenied)
+        let animInterval = setTimeout(() => {rotateFlipCard(degDenied); clearInterval(animInterval)}, degDeniedInterval)
         return
     }
     pageNum += 1;
@@ -21,6 +25,8 @@ function goNext(){
 
 function goPrev(){
     if(pageNum === 0){
+        rotateFlipCard(degDenied)
+        let animInterval = setTimeout(() => {rotateFlipCard(-degDenied); clearInterval(animInterval)}, degDeniedInterval)
         return
     }
     pageNum -= 1;
