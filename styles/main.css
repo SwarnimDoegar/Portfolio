@@ -57,7 +57,7 @@ p {
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    background-color: rgb(53, 53, 53);
+    background-color: rgb(34, 34, 34);
     flex-direction: column;
 }
 
@@ -73,7 +73,7 @@ p {
     position: relative;
     width: 100%;
     height: 100%;
-    transition: transform 0.8s ease-out;
+    transition: transform 0.8s ease;
     transform-style: preserve-3d;
     border-radius: 20px;
 }
@@ -136,7 +136,7 @@ p {
     background-color: #000;
     border-radius: 10px;
     color: var(--projects-bg);
-    padding: 7px;
+    padding: 10px;
 }
 
 .heading {
@@ -149,7 +149,7 @@ p {
     justify-content: center;
     flex-wrap: wrap;
 }
-.sites > a{
+.sites > a {
     margin: 30px 30px;
 }
 .sites img{
@@ -164,12 +164,17 @@ p {
     margin-top: 30px;
     width: 100%;
 }
-.certificate > p{
+.certificate > p {
     margin-bottom: 20px;
 }
-.certificate > a{
+.certificate > a {
     background-color: #000;
     border-radius: 10px;
     color: var(--certificates-bg);
-    padding: 7px;
+    padding: 10px;
+    word-spacing: 0.5em;
+}
+
+a {
+    text-decoration: none;
 }

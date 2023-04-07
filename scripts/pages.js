@@ -13,7 +13,7 @@ const projectsHTML = projectList
     <span class="project">
     <h4>${project.name}</h4>
     <p>${project.description}</p>
-    <a href="${project.githubLink}">Visit Repo &#10022;</a>
+    <a href="${project.githubLink}" target="_blank">Visit Repository &#10022;</a>
     </span>`;
   })
   .reduce((acc, str) => acc + str, "");
@@ -39,7 +39,7 @@ const certificatesHTML = certificates.reverse().map((cert) => {
     <h4>${cert.name}</h4>
     <h3>${cert.provider}</h3>
     <p>${cert.from} - ${cert.to}</p>
-    <a href="${cert.link}">View &#10003;</a>
+    <a href="${cert.link}" target="_blank">View &#10003;</a>
     </span>
   `;
 }).reduce((acc, str) => acc + str, "")
