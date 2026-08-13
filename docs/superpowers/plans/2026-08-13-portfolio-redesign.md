@@ -153,7 +153,7 @@ Create `src/pages/index.astro`:
 
 - [ ] **Step 6: Add the portrait asset**
 
-Copy the processed portrait into `public/`. It is a trimmed 900×1209 WebP, roughly 130KB:
+Copy the processed portrait into `public/`. It is a trimmed 900×1170 WebP, roughly 110KB:
 
 ```bash
 mkdir -p public
@@ -162,7 +162,7 @@ cwebp -q 88 -alpha_q 95 /tmp/portrait.png -o public/portrait.webp
 identify public/portrait.webp
 ```
 
-Expected: `900x1209`. If `~/Downloads/final-portfolio-image.png` is gone, extract the
+Expected: `900x1170`. If `~/Downloads/final-portfolio-image.png` is gone, extract the
 inlined base64 from the reference mockup instead:
 
 ```bash
@@ -372,10 +372,24 @@ export function compareByStartDesc(a: { start: string }, b: { start: string }): 
 Run: `npx vitest run src/lib/dates.test.ts`
 Expected: PASS, 8 tests.
 
-- [ ] **Step 5: Commit**
+- [ ] **Step 5: Remove the empty-suite escape hatch**
+
+Task 1 set `passWithNoTests: true` in `vitest.config.ts` so `npm test` exited 0
+with no tests. Real tests exist now, and leaving it means a broken `include`
+glob would pass CI with zero tests running. Delete that line.
+
+Then confirm the suite still runs and the guard works:
 
 ```bash
-git add src/lib/dates.ts src/lib/dates.test.ts
+npx vitest run
+```
+
+Expected: PASS, 8 tests — not "no test files found".
+
+- [ ] **Step 6: Commit**
+
+```bash
+git add src/lib/dates.ts src/lib/dates.test.ts vitest.config.ts
 git commit -m "feat: add date helpers deriving all role date strings from YYYY-MM"
 ```
 
@@ -1551,7 +1565,7 @@ const portrait = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/portrait.webp`;
         </h1>
       </div>
       <div class="portrait">
-        <img src={portrait} alt={`${profile.name}, smiling, in a patterned short-sleeve shirt`} width="900" height="1209" />
+        <img src={portrait} alt={`${profile.name}, smiling, in a patterned short-sleeve shirt`} width="900" height="1170" />
       </div>
     </div>
   </div>

@@ -321,7 +321,7 @@ Astro 5, zero client framework, static output.
 ├─ astro.config.mjs
 ├─ package.json
 ├─ public/
-│  ├─ portrait.webp            # 900×1209, trimmed, ~130KB
+│  ├─ portrait.webp            # 900×1170, trimmed, ~110KB
 │  ├─ og.png
 │  └─ favicon.svg
 ├─ src/
