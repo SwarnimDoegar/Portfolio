@@ -14,7 +14,8 @@
 
 - **Node 20+.** Astro 5 requires it.
 - **Static output only.** No SSR adapter, no server islands, no client-side framework.
-- **Zero colour literals outside `src/styles/tokens.css`.** Every colour is a `var(--token)`. A reviewer rejecting one thing should reject this.
+- **Zero colour literals in `src/**/*.astro` and `src/**/*.css` outside `src/styles/tokens.css`.** Every colour is a `var(--token)`. A reviewer rejecting one thing should reject this. `public/favicon.svg` is exempt — a standalone SVG asset cannot read page CSS variables; it carries a comment naming the token each hex mirrors.
+- **Never repeat a font stack in a component.** Use `var(--font-sans)` / `var(--font-mono)`, both defined in `tokens.css`.
 - **Three theme blocks, always.** Tokens are defined in bare `:root` (light), `@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) }`, and `:root[data-theme="dark"]`. Never define a colour only inside a media or attribute block.
 - **Text on `--accent` or `--gold` uses `--bg`, never white.** White on `#FF8A1F` is ~2.3:1.
 - **All motion sits inside `@media (prefers-reduced-motion: no-preference)`.**
@@ -892,6 +893,11 @@ blocks cover all three viewer theme states:
 
 ```css
 :root {
+  /* Typefaces — not theme-dependent, so defined once here. Components use
+     var(--font-mono) / var(--font-sans); the stack is never repeated. */
+  --font-sans: 'Archivo Variable', 'Archivo', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Martian Mono Variable', 'Martian Mono', ui-monospace, SFMono-Regular, monospace;
+
   /* LIGHT — cool slate ground, bright orange light on top of it */
   --bg:        #E7EBEB;
   --bg-2:      #DBE1E1;
@@ -962,7 +968,7 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--ink);
-  font-family: 'Archivo Variable', 'Archivo', ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-sans);
   font-size: 1rem;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
@@ -987,7 +993,7 @@ svg { display: block; }
 }
 
 .mono {
-  font-family: 'Martian Mono Variable', 'Martian Mono', ui-monospace, SFMono-Regular, monospace;
+  font-family: var(--font-mono);
   font-size: 0.6rem;
   font-weight: 500;
   letter-spacing: 0.13em;
@@ -1012,7 +1018,7 @@ section { padding-block: clamp(3.75rem, 7.5vh, 6rem); }
   padding: 0.6rem 1rem;
   background: var(--ink);
   color: var(--bg);
-  font-family: 'Martian Mono Variable', 'Martian Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.6rem;
   letter-spacing: 0.13em;
   text-transform: uppercase;
@@ -1396,7 +1402,7 @@ const links = [
     height: 56px;
   }
   .mark {
-    font-family: 'Martian Mono Variable', 'Martian Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 0.72rem;
     font-weight: 600;
     letter-spacing: 0.04em;
@@ -1410,7 +1416,7 @@ const links = [
     margin-left: auto;
   }
   .nav-links a {
-    font-family: 'Martian Mono Variable', 'Martian Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 0.58rem;
     font-weight: 500;
     letter-spacing: 0.13em;
@@ -1644,7 +1650,7 @@ const portrait = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/portrait.webp`;
     align-items: center;
     gap: 0.5rem;
     padding: 0.72rem 1.15rem;
-    font-family: 'Martian Mono Variable', 'Martian Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 0.6rem;
     font-weight: 500;
     letter-spacing: 0.13em;
@@ -1785,7 +1791,7 @@ const { statements, notes } = profile.now;
   .split-note { border-left: 2px solid var(--accent); padding-left: 1.2rem; }
   .split-note:nth-child(2) { border-left-color: var(--gold); }
   .split-note h4 {
-    font-family: 'Martian Mono Variable', 'Martian Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 0.6rem;
     font-weight: 600;
     letter-spacing: 0.13em;
@@ -1901,7 +1907,7 @@ const current = isCurrent(role.end);
 
   .role-when { color: var(--ink-3); }
   .role-year {
-    font-family: 'Martian Mono Variable', 'Martian Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 1.5rem;
     font-weight: 600;
     letter-spacing: -0.03em;
@@ -1921,7 +1927,7 @@ const current = isCurrent(role.end);
   .role-co h3 { font-size: clamp(1.35rem, 2.6vw, 1.9rem); letter-spacing: -0.025em; }
 
   .badge {
-    font-family: 'Martian Mono Variable', 'Martian Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 0.53rem;
     font-weight: 500;
     letter-spacing: 0.13em;
@@ -1934,7 +1940,7 @@ const current = isCurrent(role.end);
   .badge-accent { background: var(--accent); }
 
   .disc {
-    font-family: 'Martian Mono Variable', 'Martian Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 0.53rem;
     font-weight: 500;
     letter-spacing: 0.13em;
@@ -2111,7 +2117,7 @@ const linkAttrs = project.link
   .head h3 { font-size: clamp(1.2rem, 2.2vw, 1.55rem); }
 
   .badge-quiet {
-    font-family: 'Martian Mono Variable', 'Martian Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 0.53rem;
     font-weight: 500;
     letter-spacing: 0.13em;
@@ -2131,7 +2137,7 @@ const linkAttrs = project.link
     gap: 0.4rem;
     margin-top: 0.9rem;
     color: var(--accent);
-    font-family: 'Martian Mono Variable', 'Martian Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 0.55rem;
     font-weight: 500;
     letter-spacing: 0.13em;
@@ -2253,7 +2259,7 @@ import { stack } from '../lib/content.ts';
   }
   .stack-head :global(svg) { color: var(--accent); flex: none; }
   .stack-head span {
-    font-family: 'Martian Mono Variable', 'Martian Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 0.6rem;
     font-weight: 600;
     letter-spacing: 0.13em;
@@ -2596,6 +2602,16 @@ grep -rnE "#[0-9A-Fa-f]{3,8}\b" src --include="*.astro" --include="*.css" \
 ```
 
 Expected: no output. Any hit is a Global Constraints violation — replace it with a token.
+`public/favicon.svg` is deliberately outside this grep's scope and is exempt.
+
+Also confirm no component repeats a font stack:
+
+```bash
+grep -rn "Martian Mono\|Archivo" src --include="*.astro" --include="*.css" \
+  | grep -v "src/styles/tokens.css" | grep -v fontsource
+```
+
+Expected: no output — components use `var(--font-mono)` / `var(--font-sans)`.
 
 - [ ] **Step 2: Confirm the three theme blocks still hold**
 
@@ -2721,6 +2737,8 @@ git commit -m "test: verify contrast, keyboard access and responsive behaviour"
 Create `public/favicon.svg` — a sun disc on the dark ground, matching the palette:
 
 ```svg
+<!-- Exempt from the no-literals rule: a standalone SVG cannot read page CSS
+     variables. Hexes mirror the dark theme's --bg, --accent and --gold. -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
   <rect width="32" height="32" fill="#0D1114"/>
   <circle cx="16" cy="18" r="7" fill="#FF8A1F"/>
