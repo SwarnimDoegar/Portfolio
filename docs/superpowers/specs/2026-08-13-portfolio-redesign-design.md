@@ -23,10 +23,17 @@ in hand-editable JSON so future updates are a data edit, not a code change.
 This is the core requirement. Four JSON files under `src/data/` hold every word and every
 list on the page. Editing them and pushing is the entire update workflow.
 
-They are loaded through Astro's Content Layer using the `file()` loader with Zod schemas,
-so a malformed edit **fails the build with a clear message** instead of silently rendering
-a broken page. That validation is the reason for choosing Content Layer over a plain
-`import` of JSON.
+They are imported directly and validated with Zod in `src/lib/content.ts`, which runs at
+build time. A malformed edit **fails the build with a message naming the file and the
+offending field** instead of silently rendering a broken page. That validation is the whole
+point of the data layer.
+
+Astro's Content Layer (`file()` loader) was considered and rejected: its array form
+requires every object to carry a unique `id` field, which is a maintenance burden and a
+duplicate-key footgun in files meant for hand editing. Its real benefits — collections,
+slugs, per-entry routing — are irrelevant to a single-page site. A plain import plus one
+Zod parse gives identical validation with fewer moving parts and fully controlled error
+messages.
 
 ### `src/data/profile.json`
 
@@ -318,7 +325,7 @@ Astro 5, zero client framework, static output.
 │  ├─ og.png
 │  └─ favicon.svg
 ├─ src/
-│  ├─ content.config.ts        # Zod schemas + file() loaders  ← validation lives here
+│  ├─ lib/content.ts           # Zod schemas + validated JSON  ← validation lives here
 │  ├─ data/
 │  │  ├─ profile.json
 │  │  ├─ experience.json
@@ -340,6 +347,7 @@ Astro 5, zero client framework, static output.
 │  │  ├─ Contact.astro
 │  │  └─ Prose.astro           # renders **bold** safely
 │  ├─ lib/
+│  │  ├─ content.ts            # (listed above)
 │  │  ├─ dates.ts              # YYYY-MM → year marker, range label, isCurrent
 │  │  └─ inline.ts             # **bold** → <strong>, escaping everything else
 │  ├─ styles/
@@ -352,7 +360,7 @@ Astro 5, zero client framework, static output.
 Each component reads one slice of data and owns its own scoped styles. `tokens.css` is the
 single place any colour is defined.
 
-Dependencies: `astro`, `@fontsource-variable/archivo`, `@fontsource-variable/martian-mono`,
+Dependencies: `astro`, `zod`, `vitest` (dev), `@fontsource-variable/archivo`, `@fontsource-variable/martian-mono`,
 `astro-icon`, `@iconify-json/lucide`, `@iconify-json/simple-icons`, `lenis`.
 
 ## Deployment
