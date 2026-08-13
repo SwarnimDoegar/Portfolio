@@ -153,7 +153,7 @@ Create `src/pages/index.astro`:
 
 - [ ] **Step 6: Add the portrait asset**
 
-Copy the processed portrait into `public/`. It is a trimmed 900×1170 WebP, roughly 110KB:
+Copy the processed portrait into `public/`. It is a trimmed 900×1209 WebP, roughly 130KB:
 
 ```bash
 mkdir -p public
@@ -162,7 +162,7 @@ cwebp -q 88 -alpha_q 95 /tmp/portrait.png -o public/portrait.webp
 identify public/portrait.webp
 ```
 
-Expected: `900x1170`. If `~/Downloads/final-portfolio-image.png` is gone, extract the
+Expected: `900x1209`. If `~/Downloads/final-portfolio-image.png` is gone, extract the
 inlined base64 from the reference mockup instead:
 
 ```bash
@@ -1565,7 +1565,7 @@ const portrait = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/portrait.webp`;
         </h1>
       </div>
       <div class="portrait">
-        <img src={portrait} alt={`${profile.name}, smiling, in a patterned short-sleeve shirt`} width="900" height="1170" />
+        <img src={portrait} alt={`${profile.name}, smiling, in a patterned short-sleeve shirt`} width="900" height="1209" />
       </div>
     </div>
   </div>
