@@ -1,12 +1,48 @@
 ---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import Now from '../components/Now.astro';
+import Experience from '../components/Experience.astro';
+import Work from '../components/Work.astro';
+import Stack from '../components/Stack.astro';
+import Contact from '../components/Contact.astro';
+import profile from '../data/profile.json';
+
+const year = new Date().getFullYear();
 ---
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Swarnim Doegar</title>
-  </head>
-  <body>
-    <p>Scaffold.</p>
-  </body>
-</html>
+
+<Base
+  title={`${profile.name} · Full-Stack Engineer`}
+  description={`${profile.name} is a full-stack engineer at ${profile.company}, working on scalable, secure systems and the interfaces on top of them.`}
+>
+  <Nav slot="nav" />
+  <Hero />
+  <Now />
+  <Experience />
+  <Work />
+  <Stack />
+  <Contact />
+
+  <footer slot="footer">
+    <div class="wrap footer-in">
+      <span class="mono">{profile.name} · {year}</span>
+      <span class="mono">Built with Astro · Archivo &amp; Martian Mono</span>
+    </div>
+  </footer>
+</Base>
+
+<style>
+  footer {
+    border-top: 1px solid var(--rule);
+    padding-block: 1.6rem;
+    color: var(--ink-3);
+  }
+
+  .footer-in {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    justify-content: space-between;
+  }
+</style>

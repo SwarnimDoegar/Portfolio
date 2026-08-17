@@ -1,0 +1,18 @@
+[
+  {
+    "title": "2nd place, Hyperswitch hackathon",
+    "icon": "trophy",
+    "tone": "gold",
+    "badges": [],
+    "body": "Built a Square payments connector into Hyperswitch, integrating Square's payment flows into the platform, written in Rust, in 24 hours.",
+    "link": null
+  },
+  {
+    "title": "CU Connect",
+    "icon": "users",
+    "tone": "accent",
+    "badges": ["College · Full stack"],
+    "body": "A campus social platform for finding out what was actually happening around Chandigarh University. Django on the back, React Native and TypeScript on the front.",
+    "link": { "label": "View repository", "href": "https://github.com/SwarnimDoegar/Xenial-Xerus" }
+  }
+]

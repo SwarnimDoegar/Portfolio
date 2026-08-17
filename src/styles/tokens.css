@@ -1,0 +1,62 @@
+/* Palette sampled from a Goa sunset photo, accents pushed to full brightness.
+   Cool slate grounds, bright orange light on top. Every colour lives here. */
+
+:root {
+  --font-sans: 'Archivo Variable', 'Archivo', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Martian Mono Variable', 'Martian Mono', ui-monospace, SFMono-Regular, monospace;
+
+  /* light */
+  --bg: #e7ebeb;
+  --bg-2: #dbe1e1;
+  --surface: #f1f4f3;
+  --ink: #12181b;
+  --ink-2: #45525a;
+  --ink-3: #6a777e;
+  --rule: rgba(18, 24, 27, 0.14);
+  --rule-firm: rgba(18, 24, 27, 0.28);
+  --accent: #c8500a;
+  --gold: #9c6a00;
+  --gold-graphic: #ff9e12;
+  --sun-halo: rgba(255, 150, 20, 0.12);
+  --after: rgba(255, 110, 0, 0.11);
+  --scrim: rgba(231, 235, 235, 0.84);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #0d1114;
+    --bg-2: #141a1e;
+    --surface: #1a2126;
+    --ink: #edf1f2;
+    --ink-2: #a5b2b8;
+    --ink-3: #78868d;
+    --rule: rgba(237, 241, 242, 0.13);
+    --rule-firm: rgba(237, 241, 242, 0.3);
+    --accent: #ff8a1f;
+    --gold: #ffc426;
+    --gold-graphic: #ffb01a;
+    --sun-halo: rgba(255, 160, 30, 0.1);
+    --after: rgba(255, 110, 0, 0.13);
+    --scrim: rgba(13, 17, 20, 0.84);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme='dark'] {
+  --bg: #0d1114;
+  --bg-2: #141a1e;
+  --surface: #1a2126;
+  --ink: #edf1f2;
+  --ink-2: #a5b2b8;
+  --ink-3: #78868d;
+  --rule: rgba(237, 241, 242, 0.13);
+  --rule-firm: rgba(237, 241, 242, 0.3);
+  --accent: #ff8a1f;
+  --gold: #ffc426;
+  --gold-graphic: #ffb01a;
+  --sun-halo: rgba(255, 160, 30, 0.1);
+  --after: rgba(255, 110, 0, 0.13);
+  --scrim: rgba(13, 17, 20, 0.84);
+  color-scheme: dark;
+}

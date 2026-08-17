@@ -1,0 +1,129 @@
+---
+import { Icon } from 'astro-icon/components';
+import Prose from './Prose.astro';
+import projects from '../data/projects.json';
+---
+
+<section id="work">
+  <div class="wrap">
+    <p class="mono eyebrow">Selected work</p>
+    {
+      projects.map((p) => {
+        const Tag = p.link ? 'a' : 'div';
+        const attrs = p.link ? { href: p.link.href, target: '_blank', rel: 'noopener' } : {};
+        return (
+          <div class="reveal">
+            <Tag class:list={['card', `tone-${p.tone}`, { linked: !!p.link }]} {...attrs}>
+              <div class="card-ico">
+                <Icon name={`lucide:${p.icon}`} width={26} height={26} />
+              </div>
+              <div>
+                <div class="card-head">
+                  <h3>{p.title}</h3>
+                  {p.badges.map((badge) => (
+                    <span class="badge-quiet">{badge}</span>
+                  ))}
+                </div>
+                <Prose text={p.body} />
+                {p.link && (
+                  <span class="card-link">
+                    {p.link.label}
+                    <Icon name="lucide:arrow-up-right" width={12} height={12} />
+                  </span>
+                )}
+              </div>
+            </Tag>
+          </div>
+        );
+      })
+    }
+  </div>
+</section>
+
+<style>
+  .card {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 1.4rem;
+    align-items: start;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--gold);
+    padding: clamp(1.4rem, 3vw, 2.2rem);
+    text-decoration: none;
+  }
+
+  .reveal + .reveal .card {
+    margin-top: 1rem;
+  }
+
+  .tone-accent {
+    border-left-color: var(--accent);
+  }
+
+  .tone-gold .card-ico {
+    color: var(--gold);
+  }
+
+  .tone-accent .card-ico {
+    color: var(--accent);
+  }
+
+  .linked {
+    transition: background 0.25s;
+  }
+
+  .linked:hover {
+    background: var(--bg-2);
+  }
+
+  .card-head {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.6rem 0.85rem;
+  }
+
+  .card-head h3 {
+    font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+  }
+
+  .badge-quiet {
+    font-family: var(--font-mono);
+    font-size: 0.53rem;
+    font-weight: 500;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    border: 1px solid var(--rule-firm);
+    padding: 0.25rem 0.5rem;
+  }
+
+  .card :global(p) {
+    color: var(--ink-2);
+    margin-top: 0.5rem;
+    max-width: 58ch;
+  }
+
+  .card-link {
+    display: inline-flex;
+    width: fit-content;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 0.9rem;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    font-weight: 500;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+  }
+
+  .card-link :global(svg) {
+    transition: transform 0.2s;
+  }
+
+  .linked:hover .card-link :global(svg) {
+    transform: translate(2px, -2px);
+  }
+</style>
