@@ -1,0 +1,59 @@
+{
+  "name": "Swarnim Doegar",
+  "company": "ImageKit",
+  "hero": {
+    "headline": [
+      "I build",
+      "scalable,",
+      "customer-first",
+      "SaaS software."
+    ],
+    "accentLines": [
+      3
+    ],
+    "lede": "I'm **Swarnim Doegar**, a full-stack engineer. I design and build systems that have to scale and stay secure, and the interfaces people use them through."
+  },
+  "now": {
+    "statements": [
+      "Most of my work falls into four areas: **designing systems that scale, securing them, improving their performance, and diagnosing failures that are not obvious from the outside.** In practice they tend to overlap on the same problem.",
+      "I also build the interfaces those systems are used through, from customer-facing dashboards to the SDKs other engineers integrate against."
+    ],
+    "notes": [
+      {
+        "label": "Backend",
+        "body": "Distributed services, data pipelines, and access control models built to hold up under production load. I own how that work is packaged, deployed and run, not only how it is written."
+      },
+      {
+        "label": "Frontend",
+        "body": "Customer-facing dashboards, and the SDKs other teams integrate against. I build the supporting APIs alongside them, so the interface and the service behind it are designed together."
+      }
+    ]
+  },
+  "contact": {
+    "headline": [
+      "Let's",
+      "talk."
+    ],
+    "blurb": "Open to conversations about scaling backends, securing them, and the products built on top.",
+    "email": "swarnimdoegar@gmail.com",
+    "links": [
+      {
+        "label": "swarnimdoegar@gmail.com",
+        "href": "mailto:swarnimdoegar@gmail.com",
+        "icon": "mail"
+      },
+      {
+        "label": "github.com/SwarnimDoegar",
+        "href": "https://github.com/SwarnimDoegar",
+        "icon": "github"
+      },
+      {
+        "label": "in/swarnim-doegar",
+        "href": "https://www.linkedin.com/in/swarnim-doegar/",
+        "icon": "linkedin"
+      }
+    ]
+  },
+  "education": "B.E. Computer Science · Chandigarh University · 2018 to 2022 · 8.10 CGPA",
+  "languages": "English, Hindi"
+}

@@ -1,0 +1,13 @@
+---
+import { renderInline } from '../lib/inline';
+
+interface Props {
+  text: string;
+  class?: string;
+  as?: 'p' | 'span' | 'li' | 'div';
+}
+const { text, class: className, as = 'p' } = Astro.props;
+const Tag = as;
+---
+
+<Tag class={className} set:html={renderInline(text)} />

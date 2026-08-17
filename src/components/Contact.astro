@@ -1,0 +1,107 @@
+---
+import { Icon } from 'astro-icon/components';
+import Prose from './Prose.astro';
+import profile from '../data/profile.json';
+
+const { contact, education, languages } = profile;
+const BRAND = new Set(['github', 'linkedin']);
+const iconFor = (name: string) => (BRAND.has(name) ? `simple-icons:${name}` : `lucide:${name}`);
+---
+
+<section class="contact" id="contact" aria-labelledby="contact-heading">
+  <div class="wrap">
+    <h2 class="mono eyebrow" id="contact-heading">Contact</h2>
+    <p class="contact-display">
+      {
+        contact.headline.map((line, i) => (
+          <>
+            {line}
+            {i < contact.headline.length - 1 && <br />}
+          </>
+        ))
+      }
+    </p>
+    <Prose class="contact-sub" text={contact.blurb} />
+    <div class="links">
+      {
+        contact.links.map((link) => (
+          <a
+            class="link-btn"
+            href={link.href}
+            target={link.href.startsWith('http') ? '_blank' : undefined}
+            rel={link.href.startsWith('http') ? 'noopener' : undefined}
+          >
+            <Icon name={iconFor(link.icon)} width={16} height={16} />
+            {link.label}
+          </a>
+        ))
+      }
+    </div>
+    <div class="edu mono">
+      <span>{education}</span>
+      <span>Languages · {languages}</span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact {
+    border-top: 1px solid var(--rule);
+  }
+
+  .contact-display {
+    font-size: clamp(2.4rem, 6.4vw, 5.4rem);
+    font-weight: 700;
+    line-height: 0.92;
+    letter-spacing: -0.038em;
+    text-transform: uppercase;
+  }
+
+  :global(.contact-sub) {
+    color: var(--ink-2);
+    max-width: 44ch;
+    margin-top: 1.3rem;
+    font-size: 1.05rem;
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin-top: 2.2rem;
+  }
+
+  .link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.78rem 1.1rem;
+    border: 1px solid var(--rule-firm);
+    font-size: 0.9rem;
+    color: var(--ink-2);
+    transition:
+      color 0.2s,
+      border-color 0.2s,
+      background 0.2s;
+  }
+
+  .link-btn :global(svg) {
+    flex: none;
+  }
+
+  .link-btn:hover {
+    color: var(--ink);
+    border-color: var(--accent);
+    background: var(--surface);
+  }
+
+  .edu {
+    margin-top: 3.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule);
+    color: var(--ink-3);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.6rem;
+  }
+</style>
