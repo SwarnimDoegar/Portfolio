@@ -76,7 +76,7 @@ import experience from '../data/experience.json';
 
   .role-co {
     display: flex;
-    align-items: baseline;
+    align-items: center;
     flex-wrap: wrap;
     gap: 0.6rem 0.85rem;
   }
@@ -86,16 +86,29 @@ import experience from '../data/experience.json';
     letter-spacing: -0.025em;
   }
 
-  .badge {
+  /* One identical box for every tag. Inline boxes sized only by padding do not
+     align with each other once one of them carries a border, so both get an
+     explicit height, centred content, and the same 1px border (transparent on
+     the filled ones). */
+  .badge,
+  .disc {
+    display: inline-flex;
+    align-items: center;
+    height: 1.4rem;
+    padding-inline: 0.5rem;
+    border: 1px solid transparent;
     font-family: var(--font-mono);
     font-size: 0.53rem;
     font-weight: 500;
     letter-spacing: 0.13em;
     text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .badge {
     /* --bg, never white: white on --gold and --accent fails contrast */
     color: var(--bg);
     background: var(--gold);
-    padding: 0.25rem 0.5rem;
   }
 
   .badge-accent {
@@ -103,15 +116,8 @@ import experience from '../data/experience.json';
   }
 
   .disc {
-    font-family: var(--font-mono);
-    font-size: 0.53rem;
-    font-weight: 500;
-    letter-spacing: 0.13em;
-    text-transform: uppercase;
     color: var(--ink-2);
-    border: 1px solid var(--rule-firm);
-    padding: 0.25rem 0.5rem;
-    white-space: nowrap;
+    border-color: var(--rule-firm);
   }
 
   .role-title {
