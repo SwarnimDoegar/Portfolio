@@ -1,0 +1,100 @@
+---
+import Prose from './Prose.astro';
+import profile from '../data/profile.json';
+
+const { statements, notes } = profile.now;
+---
+
+<section id="now">
+  <div class="wrap">
+    <p class="mono eyebrow">Now</p>
+    <div class="two-col">
+      <div class="reveal">
+        {
+          statements.map((text, i) => (
+            <Prose class={i === 0 ? 'statement' : 'statement statement-dim'} text={text} />
+          ))
+        }
+      </div>
+      <div class="reveal split-notes">
+        {
+          notes.map((note) => (
+            <div class="split-note">
+              <h4>{note.label}</h4>
+              <Prose text={note.body} />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .two-col {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(2rem, 5vw, 4.5rem);
+    align-items: start;
+  }
+
+  :global(.statement) {
+    font-size: clamp(1.28rem, 2.7vw, 2rem);
+    font-weight: 400;
+    line-height: 1.38;
+    letter-spacing: -0.018em;
+    max-width: 40ch;
+    color: var(--ink);
+  }
+
+  :global(.statement + .statement) {
+    margin-top: 1.5rem;
+  }
+
+  :global(.statement-dim) {
+    color: var(--ink-2);
+  }
+
+  :global(.statement strong) {
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  .split-notes {
+    display: grid;
+    gap: 1.6rem;
+    margin-top: 0.5rem;
+  }
+
+  .split-note {
+    border-left: 2px solid var(--accent);
+    padding-left: 1.2rem;
+  }
+
+  .split-note:nth-child(2) {
+    border-left-color: var(--gold);
+  }
+
+  .split-note h4 {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+
+  .split-note :global(p) {
+    color: var(--ink-2);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    max-width: 40ch;
+  }
+
+  @media (max-width: 860px) {
+    .two-col {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

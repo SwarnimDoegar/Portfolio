@@ -1,0 +1,158 @@
+---
+import { Icon } from 'astro-icon/components';
+import profile from '../data/profile.json';
+
+const links = [
+  { label: 'Now', href: '#now' },
+  { label: 'Experience', href: '#experience' },
+  { label: 'Work', href: '#work' },
+  { label: 'Stack', href: '#stack' },
+  { label: 'Contact', href: '#contact' },
+];
+---
+
+<nav class="nav">
+  <div class="nav-in">
+    <a href="#top" class="mark">{profile.name.toUpperCase().replace(/ /g, ' ')}</a>
+    <div class="nav-links">
+      {links.map((link) => <a href={link.href}>{link.label}</a>)}
+    </div>
+    <button class="toggle" id="themeBtn" type="button" aria-label="Switch theme">
+      <Icon name="lucide:moon" class="i-moon" width={16} height={16} />
+      <Icon name="lucide:sun" class="i-sun" width={16} height={16} />
+    </button>
+  </div>
+</nav>
+
+<style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: var(--scrim);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .nav-in {
+    width: min(1180px, 100% - 2.5rem);
+    margin-inline: auto;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    height: 56px;
+  }
+
+  .mark {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+  }
+
+  /* only .nav-links claims the free space, otherwise the two split it
+     and the links float to the centre */
+  .nav-links {
+    display: flex;
+    gap: 1.4rem;
+    margin-left: auto;
+  }
+
+  .nav-links a {
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    font-weight: 500;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    padding-block: 0.4rem;
+    border-bottom: 1px solid transparent;
+    transition:
+      color 0.2s,
+      border-color 0.2s;
+  }
+
+  .nav-links a:hover {
+    color: var(--ink);
+    border-bottom-color: var(--accent);
+  }
+
+  .toggle {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border: 1px solid var(--rule-firm);
+    border-radius: 50%;
+    background: transparent;
+    color: var(--ink-2);
+    cursor: pointer;
+    transition:
+      color 0.2s,
+      border-color 0.2s,
+      transform 0.2s;
+  }
+
+  .toggle:hover {
+    color: var(--gold);
+    border-color: var(--gold);
+    transform: rotate(-18deg);
+  }
+
+  .toggle :global(.i-sun) {
+    display: none;
+  }
+  .toggle :global(.i-moon) {
+    display: block;
+  }
+
+  :global(:root[data-theme='dark']) .toggle :global(.i-sun) {
+    display: block;
+  }
+  :global(:root[data-theme='dark']) .toggle :global(.i-moon) {
+    display: none;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme='light'])) .toggle :global(.i-sun) {
+      display: block;
+    }
+    :global(:root:not([data-theme='light'])) .toggle :global(.i-moon) {
+      display: none;
+    }
+  }
+
+  @media (max-width: 800px) {
+    .nav-links {
+      display: none;
+    }
+    /* only now does the toggle take the right edge */
+    .toggle {
+      margin-left: auto;
+    }
+  }
+</style>
+
+<script>
+  const root = document.documentElement;
+  const btn = document.getElementById('themeBtn')!;
+
+  const active = (): 'dark' | 'light' => {
+    const stamped = root.getAttribute('data-theme');
+    if (stamped === 'dark' || stamped === 'light') return stamped;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  };
+
+  const sync = () =>
+    btn.setAttribute('aria-label', `Switch to ${active() === 'dark' ? 'light' : 'dark'} theme`);
+
+  btn.addEventListener('click', () => {
+    const next = active() === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    sync();
+  });
+
+  sync();
+</script>

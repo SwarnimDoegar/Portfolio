@@ -1,0 +1,125 @@
+---
+import '@fontsource-variable/archivo';
+import '@fontsource-variable/martian-mono';
+import '../styles/tokens.css';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+}
+const { title, description } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
+    <script is:inline>
+      // applied before first paint so a stored choice does not flash
+      var stored = localStorage.getItem('theme');
+      if (stored === 'dark' || stored === 'light') {
+        document.documentElement.setAttribute('data-theme', stored);
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <!-- the page is one sunset: a faint warm wash that drains downward as you scroll -->
+    <div class="sky" aria-hidden="true">
+      <div class="afterglow"></div>
+      <div class="sun"></div>
+    </div>
+
+    <slot name="nav" />
+    <main id="main">
+      <slot />
+    </main>
+    <slot name="footer" />
+
+    <script>
+      import '../scripts/motion.ts';
+    </script>
+
+    <style>
+      .sky {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        overflow: hidden;
+      }
+
+      .sun,
+      .afterglow {
+        position: absolute;
+        left: 50%;
+        top: -30vh;
+        width: min(150vw, 1600px);
+        aspect-ratio: 1;
+        transform: translate(-50%, 0);
+        border-radius: 50%;
+        will-change: transform, opacity;
+      }
+
+      .sun {
+        background: radial-gradient(
+          circle closest-side,
+          var(--sun-halo) 0%,
+          var(--sun-halo) 22%,
+          transparent 58%
+        );
+        opacity: 0.9;
+      }
+
+      .afterglow {
+        background: radial-gradient(circle closest-side, var(--after) 0%, transparent 55%);
+        opacity: 0;
+      }
+
+      @keyframes sun-set {
+        from {
+          transform: translate(-50%, 0) scale(1);
+          opacity: 0.9;
+        }
+        to {
+          transform: translate(-50%, 74vh) scale(0.7);
+          opacity: 0.12;
+        }
+      }
+
+      @keyframes glow-rise {
+        from {
+          transform: translate(-50%, 26vh) scale(0.85);
+          opacity: 0;
+        }
+        to {
+          transform: translate(-50%, 96vh) scale(1.25);
+          opacity: 1;
+        }
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        @supports (animation-timeline: scroll()) {
+          .sun {
+            animation: sun-set linear both;
+            animation-timeline: scroll(root block);
+          }
+          .afterglow {
+            animation: glow-rise linear both;
+            animation-timeline: scroll(root block);
+          }
+        }
+      }
+    </style>
+  </body>
+</html>

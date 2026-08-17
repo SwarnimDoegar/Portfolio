@@ -1,0 +1,32 @@
+[
+  {
+    "label": "Languages",
+    "icon": "braces",
+    "items": ["JavaScript (ES6)", "TypeScript", "PureScript", "Haskell", "Ruby", "C++", "Rust"]
+  },
+  {
+    "label": "Backend & security",
+    "icon": "server",
+    "items": ["Node.js", "Express", "Ruby on Rails", "Django", "Flask", "REST APIs", "ACLs & RBAC", "Authn & authz", "System design"]
+  },
+  {
+    "label": "Data & streaming",
+    "icon": "database",
+    "items": ["ClickHouse", "Kafka", "PostgreSQL", "MySQL", "MongoDB", "Redis", "Query optimisation"]
+  },
+  {
+    "label": "Infrastructure",
+    "icon": "container",
+    "items": ["Docker", "Kubernetes", "Terraform", "FluxCD", "Jenkins", "AWS", "GCP", "Linux"]
+  },
+  {
+    "label": "Observability",
+    "icon": "activity",
+    "items": ["Grafana", "Kibana", "Benchmarking", "Profiling"]
+  },
+  {
+    "label": "Frontend",
+    "icon": "gauge",
+    "items": ["React", "Angular", "Astro", "React Native", "HTML & CSS", "SDK design"]
+  }
+]

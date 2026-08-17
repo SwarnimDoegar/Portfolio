@@ -1,0 +1,54 @@
+[
+  {
+    "company": "ImageKit",
+    "title": "Software Engineer II",
+    "discipline": "Full stack",
+    "location": "Remote",
+    "year": "2025",
+    "period": "Sep 2025 to Present",
+    "current": true,
+    "badges": [],
+    "highlights": [
+      "Built AI-powered asset filtering that reads the user's intent and turns it into filters, so finding the right asset in a large library takes almost no effort.",
+      "Added C2PA content credentials to images ImageKit delivers, for EU compliance.",
+      "Shipped Angular and Astro SDKs so customers on those frameworks can integrate ImageKit without writing the glue themselves.",
+      "Improved UI and UX across the ImageKit dashboard and editor, including the backend APIs built to keep those journeys fast.",
+      "Added, improved and fixed bugs across ImageKit's image transformations."
+    ]
+  },
+  {
+    "company": "BrowserStack",
+    "title": "Senior Software Engineer",
+    "discipline": "Backend",
+    "location": "Remote",
+    "year": "2024",
+    "period": "Apr 2024 to Sep 2025",
+    "current": false,
+    "badges": [],
+    "highlights": [
+      "Built the backend for customisable test observability dashboards and webhooks, on ClickHouse and Kafka.",
+      "Rebuilt the external product data import pipeline, cutting **import times to 30% of original**, and made it survive failure with retry and continue mechanisms.",
+      "Found and removed performance and resource bottlenecks across features and workflows.",
+      "Optimised the database queries behind the test management product.",
+      "Built out the regression environment and disaster recovery infrastructure."
+    ]
+  },
+  {
+    "company": "Juspay",
+    "title": "Software Development Engineer",
+    "discipline": "Backend",
+    "location": "Bangalore",
+    "year": "2021",
+    "period": "Nov 2021 to Apr 2024",
+    "current": false,
+    "badges": ["Team Lead"],
+    "highlights": [
+      "Owned authentication and authorisation for the merchant dashboard. Designed **fine-grained access control from scratch** using ACLs and RBAC, giving merchants precise control over permissions inside their own accounts and materially hardening the dashboard.",
+      "Worked across other security-critical areas of the dashboard.",
+      "Made the merchant gateway integration journeys more robust across multiple gateway backends.",
+      "Led the dashboard backend team, Mar 2022 to Dec 2023.",
+      "Designed and shipped the REST APIs behind the merchant dashboard.",
+      "Cut database query time with targeted SQL optimisation."
+    ]
+  }
+]
