@@ -5,7 +5,7 @@
     "tone": "gold",
     "badges": [],
     "body": "Built a Square payments connector into Hyperswitch, integrating Square's payment flows into the platform, written in Rust, in 24 hours.",
-    "link": null
+    "link": { "label": "View Hyperswitch", "href": "https://github.com/juspay/hyperswitch" }
   },
   {
     "title": "CU Connect",
