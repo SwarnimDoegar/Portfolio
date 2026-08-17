@@ -22,7 +22,7 @@
   "now": {
     "statements": [
       "Most of my work falls into four areas: **designing systems that scale, securing them, improving their performance, and diagnosing failures that are not obvious from the outside.** In practice they tend to overlap on the same problem.",
-      "I also build the interfaces those systems are used through, from customer-facing dashboards and editors to the SDKs other engineers integrate against."
+      "I also build the interfaces those systems are used through, from customer-facing dashboards to the SDKs other engineers integrate against."
     ],
     "notes": [
       {
@@ -31,7 +31,7 @@
       },
       {
         "label": "Frontend",
-        "body": "Customer-facing dashboards and editors, and the SDKs other teams integrate against. I build the supporting APIs alongside them, so the interface and the service behind it are designed together."
+        "body": "Customer-facing dashboards, and the SDKs other teams integrate against. I build the supporting APIs alongside them, so the interface and the service behind it are designed together."
       }
     ]
   },
