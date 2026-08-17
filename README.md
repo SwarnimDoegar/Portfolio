@@ -1,6 +1,6 @@
 # Portfolio
 
-https://swarnimdoegar.github.io/Portfolio/
+https://portfolio.minraws.click
 
 Static single-page site. Astro, no client framework. Content lives in `src/data/*.json`.
 
