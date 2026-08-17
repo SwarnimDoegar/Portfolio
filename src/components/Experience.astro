@@ -3,9 +3,9 @@ import Prose from './Prose.astro';
 import experience from '../data/experience.json';
 ---
 
-<section id="experience">
+<section id="experience" aria-labelledby="experience-heading">
   <div class="wrap">
-    <p class="mono eyebrow">Experience</p>
+    <h2 class="mono eyebrow" id="experience-heading">Experience</h2>
     {
       experience.map((role, i) => (
         <div class="reveal">

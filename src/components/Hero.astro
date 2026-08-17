@@ -4,7 +4,6 @@ import Prose from './Prose.astro';
 import profile from '../data/profile.json';
 
 const { hero } = profile;
-const eyebrow = `${profile.role} · ${profile.company} · Since ${profile.since}`;
 const accent = new Set(hero.accentLines);
 const portrait = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/portrait.webp`;
 ---
@@ -13,7 +12,6 @@ const portrait = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/portrait.webp`;
   <div class="wrap">
     <div class="hero-grid">
       <div>
-        <!-- <p class="mono hero-eyebrow">{eyebrow}</p> -->
         <h1 class="display">
           {
             hero.headline.map((line, i) => (
@@ -69,14 +67,6 @@ const portrait = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/portrait.webp`;
 
   .hero-lower {
     align-items: start;
-  }
-
-  .hero-eyebrow {
-    display: block;
-    color: var(--ink-3);
-    padding-bottom: 0.9rem;
-    border-bottom: 1px solid var(--rule);
-    margin-bottom: 1.4rem;
   }
 
   .display {

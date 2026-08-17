@@ -3,16 +3,16 @@ import { Icon } from 'astro-icon/components';
 import stack from '../data/stack.json';
 ---
 
-<section id="stack">
+<section id="stack" aria-labelledby="stack-heading">
   <div class="wrap">
-    <p class="mono eyebrow">Stack</p>
+    <h2 class="mono eyebrow" id="stack-heading">Stack</h2>
     <div class="stack-grid">
       {
         stack.map((group) => (
           <div class="reveal">
             <div class="stack-head">
               <Icon name={`lucide:${group.icon}`} width={15} height={15} />
-              <span>{group.label}</span>
+              <h3>{group.label}</h3>
             </div>
             <div class="chips">
               {group.items.map((item) => (
@@ -50,7 +50,7 @@ import stack from '../data/stack.json';
     flex: none;
   }
 
-  .stack-head span {
+  .stack-head h3 {
     font-family: var(--font-mono);
     font-size: 0.6rem;
     font-weight: 600;

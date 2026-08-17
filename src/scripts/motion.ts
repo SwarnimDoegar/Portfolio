@@ -1,45 +1,35 @@
 import Lenis from 'lenis';
 
-const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-// Lenis drives real document scroll, so the native scroll() timelines on the
-// sunset layers keep working.
-if (!reduced) {
+if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
   const lenis = new Lenis({ duration: 1.1, smoothWheel: true });
+
   const raf = (time: number) => {
     lenis.raf(time);
     requestAnimationFrame(raf);
   };
   requestAnimationFrame(raf);
 
-  document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach((anchor) => {
+  // `:not(.skip-link)` matters: hijacking the skip link scrolls the page without
+  // moving focus to <main>, so a keyboard user lands back in the nav on the next
+  // Tab, which defeats the whole point of the link.
+  const anchors = document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]:not(.skip-link)');
+
+  anchors.forEach((anchor) => {
     anchor.addEventListener('click', (event) => {
-      const id = anchor.getAttribute('href')!.slice(1);
-      const target = id ? document.getElementById(id) : document.body;
+      // leave modified clicks to the browser so open-in-new-tab still works
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) {
+        return;
+      }
+
+      const href = anchor.getAttribute('href')!;
+      const target = document.getElementById(href.slice(1));
       if (!target) return;
+
       event.preventDefault();
       lenis.scrollTo(target, { offset: -56 });
+      // preventDefault also drops the hash, which breaks shareable links and the
+      // back button, so put it back by hand
+      history.pushState(null, '', href);
     });
   });
-}
-
-// reveal fallback where scroll-driven animations are unsupported (Safari)
-const reveals = document.querySelectorAll('.reveal');
-if (!CSS.supports('animation-timeline: view()')) {
-  if (reduced) {
-    reveals.forEach((el) => el.classList.add('seen'));
-  } else {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('seen');
-            observer.unobserve(entry.target);
-          }
-        }
-      },
-      { rootMargin: '0px 0px -12% 0px', threshold: 0.05 },
-    );
-    reveals.forEach((el) => observer.observe(el));
-  }
 }

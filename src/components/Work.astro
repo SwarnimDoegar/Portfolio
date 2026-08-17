@@ -4,9 +4,9 @@ import Prose from './Prose.astro';
 import projects from '../data/projects.json';
 ---
 
-<section id="work">
+<section id="work" aria-labelledby="work-heading">
   <div class="wrap">
-    <p class="mono eyebrow">Selected work</p>
+    <h2 class="mono eyebrow" id="work-heading">Selected work</h2>
     {
       projects.map((p) => {
         const Tag = p.link ? 'a' : 'div';

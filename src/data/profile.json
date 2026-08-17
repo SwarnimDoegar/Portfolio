@@ -1,12 +1,6 @@
 {
   "name": "Swarnim Doegar",
-  "role": "Software Engineer II",
   "company": "ImageKit",
-  "since": "Sep 2025",
-  "discipline": "Full stack",
-  "location": "Derabassi, IN",
-  "workMode": "Remote",
-  "yearsExperience": "4+",
   "hero": {
     "headline": [
       "I build",
@@ -17,7 +11,7 @@
     "accentLines": [
       3
     ],
-    "lede": "I'm **Swarnim Doegar**, a full-stack engineer. I design and build systems that have to scale and stay secure, and the interfaces people use them through. Currently at **ImageKit**, previously **BrowserStack** and **Juspay**."
+    "lede": "I'm **Swarnim Doegar**, a full-stack engineer. I design and build systems that have to scale and stay secure, and the interfaces people use them through."
   },
   "now": {
     "statements": [

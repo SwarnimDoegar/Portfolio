@@ -2,8 +2,10 @@
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 body {
@@ -70,6 +72,8 @@ svg {
 
 section {
   padding-block: clamp(3.75rem, 7.5vh, 6rem);
+  /* clears the 56px sticky nav when an anchor is opened without JS */
+  scroll-margin-top: 56px;
 }
 
 .skip-link {
@@ -115,26 +119,15 @@ section {
   }
 }
 
+/* Progressive enhancement only. Content is visible by default; where the
+   browser supports scroll-driven animation it also fades in. Nothing is ever
+   hidden waiting on JavaScript. */
 @media (prefers-reduced-motion: no-preference) {
   @supports (animation-timeline: view()) {
     .reveal {
       animation: rise linear both;
       animation-timeline: view();
       animation-range: entry 4% cover 26%;
-    }
-  }
-
-  @supports not (animation-timeline: view()) {
-    .reveal {
-      opacity: 0;
-      transform: translateY(22px);
-      transition:
-        opacity 0.7s ease,
-        transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
-    }
-    .reveal.seen {
-      opacity: 1;
-      transform: none;
     }
   }
 }

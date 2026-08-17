@@ -70,9 +70,19 @@ was tried and cut.
 
 ## Motion
 
-Reveals use `animation-timeline: view()`, with an IntersectionObserver fallback behind
-`@supports not (animation-timeline: view())` for Safari. Lenis handles smooth scrolling.
-Everything motion-related sits inside `@media (prefers-reduced-motion: no-preference)`.
+Reveals are a pure CSS enhancement via `animation-timeline: view()`. Browsers without
+support simply show the content with no fade. There is deliberately no JavaScript
+fallback: an earlier version hid `.reveal` in CSS and relied on an IntersectionObserver
+to reveal it, which meant a script failure, a blocked CDN, or JS disabled left five
+sections permanently invisible. Nothing on this site is hidden waiting on JavaScript.
+
+Lenis handles smooth scrolling. Its anchor handler skips `.skip-link`, because hijacking
+that link scrolls without moving focus to `<main>`, and skips modified clicks so
+open-in-new-tab still works. It restores the hash with `history.pushState`, since
+`preventDefault` would otherwise break shareable `#work` links and the back button.
+
+Everything motion-related sits inside `@media (prefers-reduced-motion: no-preference)`,
+including `scroll-behavior: smooth`.
 
 ## Gotcha worth remembering
 
@@ -81,7 +91,27 @@ Astro scopes styles per component. A class passed into a child component, like
 the rendered element carries the child's scope ID. Those rules need `:global(.lede)`.
 This silently broke the lede, the Now statements and the contact blurb on first build.
 
-## Deliberately not on the site
+## Accessibility
 
-Home address and phone number. A public portfolio is scraped continuously. Email plus
-LinkedIn is the whole contact surface.
+Each section is labelled by its own `h2`, wired with `aria-labelledby`. The visual
+eyebrow style is that `h2`, so the outline is correct without changing the design. Item
+titles inside sections are `h3`. The large "Let's talk." line is a `<p>`, not a heading,
+because "Contact" already names that section.
+
+`localStorage` access is wrapped in `try`/`catch` in both the head bootstrap and the
+toggle. It throws outright when site storage is blocked, which would otherwise abort the
+theme script or leave the toggle's `aria-label` stale.
+
+## Deliberate omissions
+
+**No mobile nav.** Below 800px the anchor links hide and there is no hamburger. This is
+five sections on one page, so scrolling reaches everything, and a drawer would mean a
+panel, focus trapping and more JavaScript for very little gain. Revisit if the page grows
+more sections.
+
+**No `CNAME` file.** This repo publishes through a custom GitHub Actions workflow, and
+GitHub ignores `CNAME` in that mode: the custom domain lives in the repo's Pages settings.
+Adding the file would look like protection while doing nothing.
+
+**No home address or phone number.** A public portfolio is scraped continuously. Email
+plus LinkedIn is the whole contact surface.

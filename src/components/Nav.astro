@@ -150,7 +150,11 @@ const links = [
   btn.addEventListener('click', () => {
     const next = active() === 'dark' ? 'light' : 'dark';
     root.setAttribute('data-theme', next);
-    localStorage.setItem('theme', next);
+    try {
+      localStorage.setItem('theme', next);
+    } catch {
+      // storage blocked, the choice just will not persist across reloads
+    }
     sync();
   });
 

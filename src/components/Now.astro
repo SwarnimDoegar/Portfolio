@@ -5,9 +5,9 @@ import profile from '../data/profile.json';
 const { statements, notes } = profile.now;
 ---
 
-<section id="now">
+<section id="now" aria-labelledby="now-heading">
   <div class="wrap">
-    <p class="mono eyebrow">Now</p>
+    <h2 class="mono eyebrow" id="now-heading">Now</h2>
     <div class="two-col">
       <div class="reveal">
         {
@@ -20,7 +20,7 @@ const { statements, notes } = profile.now;
         {
           notes.map((note) => (
             <div class="split-note">
-              <h4>{note.label}</h4>
+              <h3>{note.label}</h3>
               <Prose text={note.body} />
             </div>
           ))
@@ -75,7 +75,7 @@ const { statements, notes } = profile.now;
     border-left-color: var(--gold);
   }
 
-  .split-note h4 {
+  .split-note h3 {
     font-family: var(--font-mono);
     font-size: 0.6rem;
     font-weight: 600;

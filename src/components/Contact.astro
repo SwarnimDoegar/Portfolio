@@ -8,10 +8,10 @@ const BRAND = new Set(['github', 'linkedin']);
 const iconFor = (name: string) => (BRAND.has(name) ? `simple-icons:${name}` : `lucide:${name}`);
 ---
 
-<section class="contact" id="contact">
+<section class="contact" id="contact" aria-labelledby="contact-heading">
   <div class="wrap">
-    <p class="mono eyebrow">Contact</p>
-    <h2 class="contact-display">
+    <h2 class="mono eyebrow" id="contact-heading">Contact</h2>
+    <p class="contact-display">
       {
         contact.headline.map((line, i) => (
           <>
@@ -20,7 +20,7 @@ const iconFor = (name: string) => (BRAND.has(name) ? `simple-icons:${name}` : `l
           </>
         ))
       }
-    </h2>
+    </p>
     <Prose class="contact-sub" text={contact.blurb} />
     <div class="links">
       {
